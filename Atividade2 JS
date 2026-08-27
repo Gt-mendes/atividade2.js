@@ -1,0 +1,208 @@
+Gabriel Tiburcio Mendes
+Bernardo Machado dos Passos
+Gabriel Maia
+
+Fizemos juntos e juntamos pelo GitHub no final.
+
+html:
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Biblioteca de Jogos</title>
+    <script src="script.js" defer></script> <!-- Adicionado 'defer' para garantir que o JS carregue no momento certo -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <form onsubmit="event.preventDefault();"> <!-- Impede a página de atualizar ao clicar nos botões -->
+        
+        <h1>Minha Biblioteca de Jogos 🎮</h1>
+        <h2>Cadastrar novo jogo 📋</h2>
+
+        <div>
+            <label for="nome">Nome do Jogo:</label>
+            <input type="text" id="nome" placeholder="Digite o nome do jogo">
+        </div>
+
+        <div>
+            <label for="genero">Gênero do Jogo:</label>
+            <input type="text" id="genero" placeholder="Digite o gênero do jogo">
+        </div>
+
+        <div>
+            <label for="nota">Nota do Jogo (0, 10):</label>
+            <input type="number" id="nota" placeholder="Digite a nota do jogo">
+        </div>
+
+        <div class="container-botoes">
+            <button type="button" onclick="cadastrarJogo()">
+                Adicionar jogo 🎮
+            </button>
+            <button type="button" onclick="removerUltimoJogo()">
+                Remover último ❌
+            </button>
+        </div>
+
+        <p id="resultado" class="msn"></p>
+
+        <h2>Jogos Cadastrados 🕹️</h2>
+        <table border="1" style="border-collapse: collapse; width: 100%; text-align: left;">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Gênero</th>
+                    <th>Nota</th>
+                </tr>
+            </thead>
+            <tbody id="lista-jogos">
+
+            </tbody>
+        </table>
+
+    </form>
+    
+</body>
+</html>
+
+
+script:
+const jogos = [];
+
+function cadastrarJogo() {
+    const nome = document.getElementById("nome").value;
+    const genero = document.getElementById("genero").value;
+    const nota = document.getElementById("nota").value;
+
+    const novoJogo = {
+        nome: nome,
+        genero: genero,
+        nota: nota,
+    };
+
+    jogos.push(novoJogo);
+
+    atualizarLista();
+
+    document.getElementById("resultado").textContent = `${nome} foi adicionado à biblioteca! 🎮`;
+
+    document.getElementById("nome").value = "";
+    document.getElementById("genero").value = "";
+    document.getElementById("nota").value = "";
+}
+
+function atualizarLista() {
+    const corpoTabela = document.getElementById("lista-jogos");
+
+    corpoTabela.innerHTML = "";
+
+    jogos.forEach(jogo => {
+        const linha = `
+            <tr>
+                <td>${jogo.nome}</td>
+                <td>${jogo.genero}</td>
+                <td>${jogo.nota}</td>
+            </tr>
+        `;
+        corpoTabela.innerHTML += linha;
+    });
+}
+
+function removerUltimoJogo() {
+
+    const jogoRemovido = jogos.pop();
+
+    atualizarLista();
+
+    document.getElementById("resultado").textContent = `${jogoRemovido.nome} foi removido da biblioteca! ❌`;
+}
+
+css:
+
+html, body {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    background-color: aquamarine;
+    background-image: url("imagens/programacao.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+form {
+    width: 500px;
+    padding: 30px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    font-size: 27px;
+    margin-bottom: 30px;
+}
+
+form div {
+    margin-bottom: 20px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: lighter;
+}
+
+input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px;
+    margin-top: 8px;
+    font-size: 18px;
+    border: 1px solid #aaa;
+    border-radius: 5px;
+}
+
+.container-botoes {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 25px;
+}
+
+button {
+
+    width: 100%;
+    max-width: 180px;
+    padding: 15px;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 8px;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.msn {
+    text-align: center;  
+}
+
+p {
+    font-style: oblique;
+}
