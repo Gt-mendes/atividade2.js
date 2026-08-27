@@ -11,12 +11,12 @@ html:
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Minha Biblioteca de Jogos</title>
-    <script src="script.js" defer></script> <!-- Adicionado 'defer' para garantir que o JS carregue no momento certo -->
+    <script src="script.js" defer></script>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <form onsubmit="event.preventDefault();"> <!-- Impede a página de atualizar ao clicar nos botões -->
+    <form onsubmit="event.preventDefault();">
         
         <h1>Minha Biblioteca de Jogos 🎮</h1>
         <h2>Cadastrar novo jogo 📋</h2>
@@ -128,7 +128,6 @@ html, body {
 
 body {
     background-color: aquamarine;
-    background-image: url("imagens/programacao.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
